@@ -1,0 +1,52 @@
+import react, { useEffect, useState } from "react"
+import {useSelector} from "react-redux"
+import Postcard   from "./Postcard"
+import service from "../../appwrite/config"
+import {  Link,useParams } from "react-router-dom";
+
+function Viewproducts(){
+
+    // const slugTitle = useSelector((state)=>state.data.titleSlug)
+    // const slugItem = useSelector((state)=>state.data.navSlug)
+
+    const {slug} = useParams()
+    
+
+     const [posts,setPosts] = useState([])
+     const [document,SetDocument]=useState([])
+    
+      useEffect(()=>{
+        const getInfo = async ()=>{
+      if(posts){
+       const posts = await service.getPosts([])
+      //  console.log("okay")
+       if(posts){
+               SetDocument(posts.documents)
+              //  console.log("in")
+             }
+           }
+      };getInfo()
+      },[slug])          
+                
+      useEffect(()=>{
+        const Mydoc = document.filter((doc)=>doc.slug==slug)
+        if(Mydoc){  
+          setPosts(Mydoc)  
+        }
+      },[document])           
+            
+    return(
+        <Link to={slug}>
+        <div className="m-4 flex flex-wrap gap-12 max-sm:gap-4">
+       {posts.map((post)=>(
+           <div key={post.$id}>
+            <Postcard {...post}/>
+           </div>
+       ))}
+          
+        </div>
+        </Link>
+    )
+}
+
+export default Viewproducts
