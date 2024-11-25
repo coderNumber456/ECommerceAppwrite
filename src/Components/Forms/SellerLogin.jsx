@@ -24,9 +24,10 @@ function SellerLogin() {
       const session = await authService.login(data)
       if (session == undefined) {
           const userData = await authService.getCurrentUser()
+          // console.log(userData)
           if (userData) {
             dispatch(authSliceLogin(userData))
-            dispatch(sellFlag());// takes the user data into the state and sets the auth status true
+            dispatch(sellFlag(true));// takes the user data into the state and sets the auth status true
           navigate("/")}
       }
      }

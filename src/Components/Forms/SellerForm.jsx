@@ -6,6 +6,7 @@ import Dropdown from "./Dropdowns";
 import { useSelector } from "react-redux";
 import { getQuantity } from "../../Store/dataSlice";
 import service from "../../appwrite/config";
+import { useNavigate } from "react-router-dom";
 
 
 function SellerForm({post}) {
@@ -13,6 +14,10 @@ function SellerForm({post}) {
   const itemQuantity = useSelector((state)=>state.data.quantity)
   const slugData = useSelector((state)=>state.data.slug)
   const userData  = useSelector((state)=>state.auth.userData)
+  const Navigate = useNavigate()
+
+  console.log(userData , "hello");
+  
  
   const quantity = JSON.stringify(itemQuantity)
 
@@ -26,7 +31,7 @@ function SellerForm({post}) {
   })
 
   const CreatePost = async (data) => {
-    console.log(data.Color)
+    // console.log(data.Color)
       const file1 = await service.uploadFile(data.file1[0])
       const file2 = await service.uploadFile(data.file2[0])
       const file3 = await service.uploadFile(data.file3[0])
@@ -35,12 +40,16 @@ function SellerForm({post}) {
       
            
       if(file1,file2,file3,file4){
-        // console.log(userData.$id);
+        console.log(userData.$id);
         
              const fileid= `${file1.$id},${file2.$id},${file3.$id},${file4.$id}`
              data.featuredImage=fileid
 
-             const dbPost = await service.createPost({...data, userId:userData.$id,slug:slugData,quantity:quantity})     
+             const dbPost = await service.createPost({...data, userId:userData.$id,slug:slugData,quantity:quantity}) 
+             
+             if(dbPost){
+              Navigate("/")
+             }
       }     
   }
 

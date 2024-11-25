@@ -11,11 +11,11 @@ import { login } from "../Store/authSlice";
 function Header(){
 
     const authData  = useSelector((state)=>state.auth.userData)
-    
     const authFlagStatus  = useSelector((state)=>state.auth.flag)
     const [status , setStatus] = useState(false)
     const [logStatus , setLogStatus] = useState(false)
     const [login,setLogin] = useState(true)
+
 
   
     useEffect(()=>{

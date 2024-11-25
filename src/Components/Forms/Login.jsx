@@ -13,6 +13,8 @@ function Login() {
   const [Display, setDisplay] = useState("hidden")
   const [Number, setNumber] = useState([])
   const [Text, setText] = useState("")
+  const [cursor,setCursor]=useState("Cursor-allowed")
+  const [send,setSend] = useState("Send Otp")
   const { register, handleSubmit } = useForm()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -32,6 +34,12 @@ function Login() {
 
   const SendOtp = async (e) => {
     e.preventDefault()
+    setSend("Otp sent")
+    setCursor("cursor-not-allowed")
+    setTimeout(() => {
+       setSend("Re-send Otp")
+       setCursor("cursor-allowed")
+    }, 17000);
     const phone = "+91" + Number
     const data = await authService.CustomerLogin({ userId: Number, phone: phone })
     // if (data == undefined) {
@@ -43,7 +51,7 @@ function Login() {
     const userData = await authService.OtpVerification(Number, data.secret)
     if (userData == undefined) {
       const userData = await authService.getCurrentUser()
-      console.log(userData);
+      // console.log(userData);
       if (userData) {
         dispatch(login(userData))
         navigate("/")
@@ -62,7 +70,7 @@ function Login() {
         />
 
         <button onClick={SendOtp} className={`bg-red-500 font-Balsamiq text-white 
-            p-2 rounded-lg hover:bg-red-300 hover:text-slate-700 ${Display}`}>Send Otp</button>
+            p-2 rounded-lg hover:bg-red-300 hover:text-slate-700 ${cursor}  ${Display}`}>{send}</button>
 
         <form onSubmit={handleSubmit(VerifyOtp)}>
 
