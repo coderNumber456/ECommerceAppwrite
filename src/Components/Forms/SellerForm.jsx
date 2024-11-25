@@ -14,10 +14,7 @@ function SellerForm({post}) {
   const itemQuantity = useSelector((state)=>state.data.quantity)
   const slugData = useSelector((state)=>state.data.slug)
   const userData  = useSelector((state)=>state.auth.userData)
-  const Navigate = useNavigate()
-
-  console.log(userData , "hello");
-  
+  const navigate = useNavigate()
  
   const quantity = JSON.stringify(itemQuantity)
 
@@ -46,9 +43,10 @@ function SellerForm({post}) {
              data.featuredImage=fileid
 
              const dbPost = await service.createPost({...data, userId:userData.$id,slug:slugData,quantity:quantity}) 
+             console.log(dbPost)
              
-             if(dbPost){
-              Navigate("/")
+             if(dbPost==undefined){
+              navigate("/")
              }
       }     
   }

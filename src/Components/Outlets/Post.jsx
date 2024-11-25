@@ -8,12 +8,14 @@
     function Post(){
 
         const data = useParams()
-        const navigate = useNavigate
+        const navigate = useNavigate()
         const [post,setPost]=useState(null)
         const [image,setImage] = useState([])
         const [photo,setPhoto] =useState()  
         const [qty,setQty]=useState(1)
         const [size,setSize] =useState("S") 
+        const[display,setDisplay] = useState("hidden")
+        const [click,setClick] =useState("cursor-allowed")
         
         useEffect(()=>{
             if(data){
@@ -31,14 +33,23 @@
     
     const AddtoCart = async(e)=>{
         e.preventDefault()
+        
         await authService.getCurrentUser().then((userData)=>{
             if(post!==null && userData!==null){
                   service.createCartdata({docId:post.$databaseId,
                   featuredImage:image[0],Color:post.Color,price:post.price,
-                  quantity:qty,size:size,title:post.title,userId:userData.$id})  
+                  quantity:qty,size:size,title:post.title,userId:userData.$id}); 
+                  setDisplay("block")
+                  setClick('cursor-not-allowed')
            }   
         })      
     }
+
+  const viewCart =(e)=>{
+    e.preventDefault()
+    navigate("/cart")
+
+  }
       
     return post? (
     <div className="flex mx-60 gap-10
@@ -101,10 +112,14 @@
         <p>{post.description}</p>
         </div>
 
-                <div>
-                <button className="bg-[#B62026] h-14 text-white w-96 font-mono text-lg" 
-                onClick={AddtoCart}>Add to Cart</button>
-                </div>
+        <div>
+        <button className={`bg-[#B62026] h-14 text-white w-96 font-mono text-lg ${click}`} 
+        onClick={AddtoCart}>Add to Cart</button>
+        </div>
+        <div>
+        <button className={`bg-[#B62026] h-14 text-white w-96 font-mono text-lg ${display}`} 
+        onClick={viewCart}>View Cart</button>
+        </div>
 
             </div>
         </div>
