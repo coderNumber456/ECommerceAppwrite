@@ -19,10 +19,8 @@ function Viewproducts(){
         const getInfo = async ()=>{
       if(posts){
        const posts = await service.getPosts([])
-      //  console.log("okay")
        if(posts){
                SetDocument(posts.documents)
-              //  console.log("in")
              }
            }
       };getInfo()

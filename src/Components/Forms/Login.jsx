@@ -19,7 +19,8 @@ function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-
+  const myData= JSON.parse(localStorage.getItem("data"))
+  // console.log(myData)
 
   useEffect(() => {
     if (Number.length == 10) {
@@ -54,10 +55,16 @@ function Login() {
       // console.log(userData);
       if (userData) {
         dispatch(login(userData))
-        navigate("/")
+        if(myData){
+          navigate(`/post/${myData.id}`)
+          localStorage.clear()
+        }else{
+          navigate("/")
+        }
       }
     }
   }
+
 
     return (
 

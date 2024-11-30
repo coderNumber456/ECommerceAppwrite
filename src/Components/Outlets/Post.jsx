@@ -41,10 +41,13 @@
                   quantity:qty,size:size,title:post.title,userId:userData.$id}); 
                   setDisplay("block")
                   setClick('cursor-not-allowed')
-           }   
+           }else{
+            localStorage.setItem("data",JSON.stringify(data))
+            navigate("/login")
+         } 
         })      
     }
-
+    
   const viewCart =(e)=>{
     e.preventDefault()
     navigate("/cart")
@@ -53,7 +56,7 @@
       
     return post? (
     <div className="flex mx-60 gap-10
-      max-sm:flex-col max-sm:mx-0 max-sm:gap-1 max-sm:justify-center max-sm:items-center">
+      max-sm:flex-col max-sm:mx-0 max-sm:gap-1 max-sm:justify-center max-sm:items-center ">
 
     <div>
     <div className="mt-10"> 
@@ -69,7 +72,7 @@
 
     {/* Texts */}
 
-    <div className="mt-10 w-96  max-sm:mt-4">
+    <div className="mt-10 w-96  max-sm:mt-4 max-md:scale-95">
         <div className="flex flex-col items-start border-b-2 border-slate-500 p-5">
             <div>
                 <h1 className="text-[30px] text-center font-mono">{post.BrandName}</h1>
@@ -77,19 +80,19 @@
             </div>
             <div className="flex gap-10">
                 <span className="text-[30px] font-mono text-[#B62026]">₹{post.price}</span>
-                <span className="text-[30px]  text-[#322e2e] line-through  bg-slate-200">₹900</span>
+                <span className="text-[30px] text-[#322e2e] line-through  bg-slate-200">₹900</span>
                 
             </div>
         </div>
 
         <div className="flex flex-col gap-4">
+            <div className="max-md:scale-90">
             <div>
-            <div>
-            <p className="text-xl"> color: {post.Color}</p>
+            <p className="text-xl"> color : {post.Color}</p>
             </div>
-            <div className={`h-10 w-10 bg-[${post.Color}] border-black border-[1px]`}> </div>
+            <div  style={{"background-color":post.Color}} className={`h-10 w-10 bg-"[${post.Color}]"  border-black border-[1px] `}> </div>
             </div>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 max-md:scale-90">
                 <div> <p className="text-xl">Size:</p></div>
                 <div  className="flex gap-3">
                 <button className={`h-10 w-10 bg-slate-300 ${size=="S"?"border-black border-[1px]":null}`}onClick={()=>setSize("S")}>S</button> {/* // border-black border-[1px] */}

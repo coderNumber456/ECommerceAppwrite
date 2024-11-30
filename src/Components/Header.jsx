@@ -84,7 +84,7 @@ function Header(){
         gap-3
         items-center  
          bg-[#B62026] shadow-lg
-        text-[white]  font-Balsamiq    xl:px-14 xl:h-16   ">
+        text-[white]  font-Balsamiq  xl:px-14 xl:h-16  max-sm:px-2 ">
        
        <div className="
        flex flex-row gap-8 max-sm:justify-evenly ">
@@ -107,12 +107,12 @@ function Header(){
        
            {/* logo */}
         <div className="flex items-center justify-center">
-            <span className="xl:items-center xl:text-center xl:ml-44">
+            <span className="xl:items-center xl:text-center xl:ml-44 ">
             <Logo/>
             </span>
            </div>
 
-        <div className="flex xl:space-x-2 max-sm:justify-evenly max-sm:w-[378px]  
+        <div className="flex xl:space-x-2 max-sm:justify-evenly max-sm:w-[355px]  
         max-lg:justify-center  max-md:justify-center justify-end  w-96 ">
             <Search/>
          {
