@@ -9,46 +9,46 @@ import service from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 
 
-function SellerForm({post}) {
+function SellerForm({ post }) {
 
-  const itemQuantity = useSelector((state)=>state.data.quantity)
-  const slugData = useSelector((state)=>state.data.slug)
-  const userData  = useSelector((state)=>state.auth.userData)
+  const itemQuantity = useSelector((state) => state.data.quantity)
+  const slugData = useSelector((state) => state.data.slug)
+  const userData = useSelector((state) => state.auth.userData)
   const navigate = useNavigate()
- 
+
   const quantity = JSON.stringify(itemQuantity)
 
-  const {register,handleSubmit} = useForm({
-    defaultValues:{
-      BrandName:post?.BrandName||null,
-      Title:post?.Title||null,
-      Price:post?.Price||null,
-      description:post?.description||null
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      BrandName: post?.BrandName || null,
+      Title: post?.Title || null,
+      Price: post?.Price || null,
+      description: post?.description || null
     }
   })
+  // console.log(userData.$id)
 
   const CreatePost = async (data) => {
-    // console.log(data.Color)
-      const file1 = await service.uploadFile(data.file1[0])
-      const file2 = await service.uploadFile(data.file2[0])
-      const file3 = await service.uploadFile(data.file3[0])
-      const file4 = await service.uploadFile(data.file4[0])
-      // console.log(file1,file2,file3,file4);
-      
-           
-      if(file1,file2,file3,file4){
-        console.log(userData.$id);
-        
-             const fileid= `${file1.$id},${file2.$id},${file3.$id},${file4.$id}`
-             data.featuredImage=fileid
+    console.log(data)
+    const file1 = await service.uploadFile(data.file1[0])
+    const file2 = await service.uploadFile(data.file2[0])
+    const file3 = await service.uploadFile(data.file3[0])
+    const file4 = await service.uploadFile(data.file4[0])
+    if (file1, file2, file3, file4) {
+      try {
 
-             const dbPost = await service.createPost({...data, userId:userData.$id,slug:slugData,quantity:quantity}) 
-             console.log(dbPost)
-             
-             if(dbPost==undefined){
-              navigate("/")
-             }
-      }     
+        const fileid = `${file1.$id},${file2.$id},${file3.$id},${file4.$id}`
+        data.featuredImage = fileid
+        const dbPost = await service.createPost({ ...data, userId: userData.$id, slug: slugData, quantity: quantity })
+        if (dbPost == undefined) {
+          navigate("/")
+          alert("done")
+        }
+      } catch (error) {
+        alert(error)
+      }
+
+    }
   }
 
   return (
@@ -57,68 +57,69 @@ function SellerForm({post}) {
 
       <div className="w-1/2 max-sm:w-auto">
         <Input type={"text"} label={"Brand Name"} Placeholder={"Brand Name"}
-          className="mb-4 border-b-2 border-gray-200 mt-1" 
-          {...register("BrandName",{
-            required: true,
-          })}
-          />
-        <Input type={"text"} label={"Title"} Placeholder={"Title"}
-          className="mb-4 border-b-2 border-gray-200" 
-          {...register("title", {
-            required: true,
-          })}/>
-        <Input type={"text"} label={"Price"} Placeholder={"$100,000"}
-          className="mb-4 border-b-2 border-gray-200" 
-          {...register("price", {
-            required: true,
-          })}
-          />
-          
-        <Input type={"textarea"} placeholder="Enter The Description" className="h-24 w-80 mb-4 mt-6 border-b-4 border-slate-700 p-4 text-slate-600 text-center"
-           {...register("description", {
+          className="mb-4 border-b-2 border-gray-200 mt-1"
+          {...register("BrandName", {
             required: true,
           })}
         />
-         
-        <Dropdown/>
-        {slugData? <p>{slugData}</p>:null}
-          
+        <Input type={"text"} label={"Title"} Placeholder={"Title"}
+          className="mb-4 border-b-2 border-gray-200"
+          {...register("title", {
+            required: true,
+          })} />
+        <Input type={"text"} label={"Price"} Placeholder={"$100,000"}
+          className="mb-4 border-b-2 border-gray-200"
+          {...register("price", {
+            required: true,
+          })}
+        />
+
+        <Input type={"textarea"} placeholder="Enter The Description" className="h-24 w-80 mb-4 mt-6 border-b-4 border-slate-700 p-4 text-slate-600 text-center"
+          {...register("description", {
+            required: true,
+          })}
+        />
+
+        <Dropdown />
+        {slugData ? <p>{slugData}</p> : null}
+
 
       </div>
 
       <div className="flex flex-col gap-4">
         <Select />
-        {itemQuantity ? <p>S:{itemQuantity.s} M :{itemQuantity.m} L:{itemQuantity.l} XL:{itemQuantity.xxl}</p>:null}
+        {itemQuantity ? <p>S:{itemQuantity.s} M :{itemQuantity.m} L:{itemQuantity.l} XL:{itemQuantity.xxl}</p> : null}
         <div className="w-44 flex" >
-        <Input type={"Text"} placeholder={"Color"}
-        {...register("Color", {
-          required: true,
-        })} />
+          {/* <label>Color</label> */}
+          <Input type={"color"} className="h-12 w-28" label="Select Color"
+            {...register("Color", {
+              required: true,
+            })} />
         </div>
         <h2 className="font-Balsamiq mt-2">Upload Images</h2>
         <Input type={"file"}
-        {...register("file1", {
-          required: true,
-        })} />
+          {...register("file1", {
+            required: true,
+          })} />
         <Input type={"file"}  {...register("file2", {
           required: true,
-        })}/>
-        <Input type={"file"} 
-         {...register("file3", {
-          required: true,
-          
-        })}/> 
-        <Input type={"file"} 
-         {...register("file4", {
-          required: true,
-        })}/>
+        })} />
+        <Input type={"file"}
+          {...register("file3", {
+            required: true,
+
+          })} />
+        <Input type={"file"}
+          {...register("file4", {
+            required: true,
+          })} />
       </div>
 
       <div className=" ">
-            <button className="bg-red-300 p-3 test-center hover:bg-red-600 rounded-xl" type="submit">
-                Submit Item
-            </button>
-        </div>
+        <button className="bg-red-300 p-3 test-center hover:bg-red-600 rounded-xl" type="submit">
+          Submit Item
+        </button>
+      </div>
 
     </form>
   )

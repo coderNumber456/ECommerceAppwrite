@@ -28,9 +28,7 @@
         navigate("/")
     }
     },[data,navigate])  
-
-   
-    
+     
     const AddtoCart = async(e)=>{
         e.preventDefault()
         
@@ -80,7 +78,7 @@
             </div>
             <div className="flex gap-10">
                 <span className="text-[30px] font-mono text-[#B62026]">₹{post.price}</span>
-                <span className="text-[30px] text-[#322e2e] line-through  bg-slate-200">₹900</span>
+                <span className="text-[30px] text-[#322e2e] line-through  bg-slate-200">{parseInt(post.price)+120}</span>
                 
             </div>
         </div>
@@ -88,7 +86,7 @@
         <div className="flex flex-col gap-4">
             <div className="max-md:scale-90">
             <div>
-            <p className="text-xl"> color : {post.Color}</p>
+            <p className="text-xl"> color</p>
             </div>
             <div  style={{"background-color":post.Color}} className={`h-10 w-10 bg-"[${post.Color}]"  border-black border-[1px] `}> </div>
             </div>

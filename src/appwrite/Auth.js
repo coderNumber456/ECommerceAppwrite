@@ -22,7 +22,8 @@ export class AuthService{
                 return this.login({email,password})
              }
         } catch (error) {
-            throw error
+            console.log(error) ;
+            alert(error) 
         }
     }
 
@@ -30,7 +31,9 @@ export class AuthService{
         try {
             await this.account.createEmailPasswordSession(email,password)
         } catch (error) {
-           throw error 
+           console.log(error) ;
+           alert(error) 
+          
         }
     }
 
@@ -43,11 +46,17 @@ export class AuthService{
              }
         } catch (error) {
             console.log(error)
+           
         }
     }
 
     async OtpVerification(userId,secret){
-        await this.account.createSession(userId,secret)
+        try {
+            
+            await this.account.createSession(userId,secret)
+        } catch (error) {
+           alert(error)     
+        }
     }
 
     async getCurrentUser(){
