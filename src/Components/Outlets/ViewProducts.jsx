@@ -34,16 +34,20 @@ function Viewproducts(){
       },[document])           
             
     return(
-        <Link to={slug}>
-        <div className="m-4 flex flex-wrap gap-12 max-sm:gap-4">
-       {posts.map((post)=>(
-           <div key={post.$id}>
-            <Postcard {...post}/>
-           </div>
-       ))}
-          
-        </div>
-        </Link>
+        
+      posts.length ? 
+      <Link to={slug}>
+      <div className="m-4 flex flex-wrap gap-12 max-sm:gap-4">
+     {posts.map((post)=>(
+         <div key={post.$id}>
+          <Postcard {...post}/>
+         </div>
+     ))}
+        
+      </div>
+      </Link> : <>
+            <h1 className="text-6xl text-center my-44"> Oops...!! No Products yet..</h1>
+      </>
     )
 }
 

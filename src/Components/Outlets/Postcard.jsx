@@ -14,7 +14,7 @@ function Postcard({$id,BrandName,title,price,featuredImage}){
 
         return(
           <div className=" bg-gray-300 h-80 w-56 flex flex-col justify-center gap-4 rounded-lg
-          font-Balsamiq max-sm:scale-50 max-sm:gap-2 max-sm:inline">
+          font-Balsamiq max-sm:w-11 max-sm:gap-2  max-sm:scale-50 max-sm:inline">
                <Link to={`/post/${$id}`}>
                 <div className="h-48 w-40 max-sm:75 mt-1 mx-auto">
                     <img src={service.getFilePreview(img)} alt="shirt" className="h-48 w-40"/>
