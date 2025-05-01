@@ -7,17 +7,19 @@ import { json, Link } from "react-router-dom";
 function Postcard({$id,BrandName,title,price,featuredImage}){
 
      
-       const image= featuredImage.split(",")
+          const images = JSON.parse(featuredImage)
+          console.log(images)
+          
+          console.log(images)
+          const img = images.file1
        
-  
-       const img = image[0]
 
         return(
           <div className=" bg-gray-300 h-80 w-56 flex flex-col justify-center gap-4 rounded-lg
           font-Balsamiq max-sm:w-11 max-sm:gap-2  max-sm:scale-50 max-sm:inline">
                <Link to={`/post/${$id}`}>
                 <div className="h-48 w-40 max-sm:75 mt-1 mx-auto">
-                    <img src={service.getFilePreview(img)} alt="shirt" className="h-48 w-40"/>
+                    <img src={img} alt="shirt" className="h-48 w-40"/>
                 </div>
                <div >
                 <h1 className="text-center">{BrandName}</h1>

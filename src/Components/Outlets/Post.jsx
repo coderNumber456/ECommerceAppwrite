@@ -21,7 +21,8 @@
             if(data){
                 service.getPost(data.id).then((post)=>{
                     if(post) {setPost(post)
-                        setImage(post.featuredImage.split(","))
+                     const images = JSON.parse(post.featuredImage)
+                     setImage(images)
                 }else(navigate("/"))
         })
     }else{
@@ -58,13 +59,13 @@
 
     <div>
     <div className="mt-10"> 
-    <img src={service.getFilePreview(photo ? photo : image[0])} 
-    className="h-[450px] rounded-lg" alt="p" /></div>
+    <img src={photo ? photo : image.file1} 
+    className="h-[450px] w-80 rounded-lg" alt="p" /></div>
     <div className="h-28 w-[337.5px]  flex flex-row gap-7">
-        <button onClick={()=>setPhoto(image[0])}><img src= {service.getFilePreview(image[0])} alt="Image" className="h-20"/></button>
-        <button onClick={()=>setPhoto(image[1])}><img src= {service.getFilePreview(image[1])} alt="Image" className="h-20"/> </button>
-        <button onClick={()=>setPhoto(image[2])}><img src= {service.getFilePreview(image[2])} alt="Image"  className="h-20"/> </button>
-        <button onClick={()=>setPhoto(image[3])}><img src= {service.getFilePreview(image[3])} alt="Image"  className="h-20"/> </button>
+    <button onClick={()=>setPhoto(image.file1)}><img src= {image.file1} alt="Image" className="h-20"/></button>
+    <button onClick={()=>setPhoto(image.file2)}><img src= {image.file2} alt="Image" className="h-20"/> </button>
+    <button onClick={()=>setPhoto(image.file3)}><img src= {image.file3} alt="Image"  className="h-20"/> </button>
+    <button onClick={()=>setPhoto(image.file4)}><img src= {image.file4} alt="Image"  className="h-20"/> </button>
     </div>
         </div>
 

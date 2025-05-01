@@ -39,6 +39,7 @@ export class Service {
             )
         } catch (error) {
             console.log("Appwite service:: createPost::error", error);
+            alert(error)
         }
     }
 

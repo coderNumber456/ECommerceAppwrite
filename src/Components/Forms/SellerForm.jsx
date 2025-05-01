@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState ,useEffect } from "react";
 import { Form, useForm } from "react-hook-form"
 import Input from "../Textinput";
 import Select from "../Select";
@@ -6,15 +6,32 @@ import Dropdown from "./Dropdowns";
 import { useSelector } from "react-redux";
 import { getQuantity } from "../../Store/dataSlice";
 import service from "../../appwrite/config";
+import authService from "../../appwrite/Auth";
 import { useNavigate } from "react-router-dom";
+import { uploadOnClodinary } from "../../utils/cloudinary";
 
 
 function SellerForm({ post }) {
 
   const itemQuantity = useSelector((state) => state.data.quantity)
   const slugData = useSelector((state) => state.data.slug)
-  const userData = useSelector((state) => state.auth.userData)
+  // const userData = useSelector((state) => state.auth.userData)
   const navigate = useNavigate()
+
+  const [userData , setUserData ] = useState(null)
+
+
+  useEffect(()=>{
+    const getData = async()=>{
+      try {
+         const data = await authService.getCurrentUser();
+         setUserData(data)
+      } catch (error) {
+        console.log(`user not found error message - ${error}`)
+        throw error
+      }
+    };getData()
+},[])
 
   const quantity = JSON.stringify(itemQuantity)
 
@@ -29,26 +46,34 @@ function SellerForm({ post }) {
   // console.log(userData.$id)
 
   const CreatePost = async (data) => {
-    console.log(data)
-    const file1 = await service.uploadFile(data.file1[0])
-    const file2 = await service.uploadFile(data.file2[0])
-    const file3 = await service.uploadFile(data.file3[0])
-    const file4 = await service.uploadFile(data.file4[0])
-    if (file1, file2, file3, file4) {
-      try {
+   
 
-        const fileid = `${file1.$id},${file2.$id},${file3.$id},${file4.$id}`
-        data.featuredImage = fileid
-        const dbPost = await service.createPost({ ...data, userId: userData.$id, slug: slugData, quantity: quantity })
+      try {
+        const file1 = await uploadOnClodinary(data.file1[0])
+        const file2 = await uploadOnClodinary(data.file2[0])
+        const file3 = await uploadOnClodinary(data.file3[0])
+        const file4 = await uploadOnClodinary(data.file4[0])
+        // console.log(file1,file2,file3,file4);
+ 
+ 
+        const fileData = {file1 , file2 , file3 , file4}
+
+
+  
+        if(Object.keys(fileData).length!==0){
+             const fileid= JSON.stringify(fileData)
+              data.featuredImage=fileid
+
+          const dbPost = await service.createPost({ ...data, userId: userData.$id, slug: slugData, quantity: quantity })
         if (dbPost == undefined) {
           navigate("/")
           alert("done")
         }
+        }
+        
       } catch (error) {
         alert(error)
       }
-
-    }
   }
 
   return (
