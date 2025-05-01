@@ -6,7 +6,7 @@ function Home(){
 
 
     return(
-        <div className="flex flex-wrap justify-evenly items-center mt-10 ">
+        <div className="flex flex-wrap justify-evenly items-center mt-10">
          <Card Title={"Mens"} Subtitle={
             {"Top-Wear":["Casual Shirts","Formal Shirts","Sweatshirts","Sweaters","Jackets","Blazers & Coats"],
             "Bottom-Wear" :["Jeans","Casual Trousers","Formal Trousers","Shorts","Track Pants & Joggers"], 

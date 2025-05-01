@@ -18,6 +18,8 @@ function CompleteOrder() {
         };getItems()         
     },[])
 
+    
+
     let myVal = Number
     if (data.length !== 0) {
         const arr = []
@@ -62,7 +64,7 @@ function CompleteOrder() {
                         {data.map((item) => (
                             <div className="flex max-sm:flex-wrap gap-2 border-b-2 border-[#5b161a] p-2 ">
                                 <div className="h-20 w-14">
-                                    <img src={service.getFilePreview(item.featuredImage)} alt="Img" /></div>
+                                    <img src={JSON.parse(item.featuredImage)} alt="Img" /></div>
                                 <div className="relative mt-4">
                                     <p className="text-[1rem]">{item.title}</p>
                                     <p>{item.Color} / {item.size} /qty:{item.quantity}</p>

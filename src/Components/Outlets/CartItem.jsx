@@ -17,13 +17,14 @@ function Cartitem({$id,title,Color,size,price,quantity,featuredImage}){
        dispatch(qtyFlag())
     },[qty,load])
 
+     const image = JSON.parse(featuredImage)
     
 
     return(
    
         <div className="mt-4 flex justify-between text-slate-700 border-b-2 border-slate-300 pb-8">
         <div className="flex flex-wrap">
-        <img src={service.getFilePreview(featuredImage)} alt="" 
+        <img src={image} alt="" 
         className="h-40 w-32"/>
         <div className="pl-4 my-auto w-64  max-sm:w-44 overflow-clip text-[0.9rem]">
             <h1>

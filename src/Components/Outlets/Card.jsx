@@ -35,8 +35,8 @@ const dispatch = useDispatch()
        setDisplay("hidden")
 } 
     return (
-        <div className="bg-[#f2f2f2] shadow-l shadow-red-100 cursor-pointer h-auto w-96 p-4 rounded-md mx-14 my-7  "
-        onMouseEnter={ShowList} onMouseLeave={Clear} onClick={getData}>
+        <div className="bg-[#f2f2f2] shadow-l shadow-red-100 cursor-pointer h-auto w-96 p-4 rounded-md mx-14 my-7 realtive"
+        onMouseEnter={ShowList} onMouseLeave={Clear} onClick={getData} >
             
             <h1 className="text-center p-3 font-Balsamiq text-[#6c293d] text-2xl
             transition-transform duration-700 ">{Title}</h1>

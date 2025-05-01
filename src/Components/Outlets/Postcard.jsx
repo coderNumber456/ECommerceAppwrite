@@ -6,25 +6,21 @@ import { json, Link } from "react-router-dom";
 
 function Postcard({$id,BrandName,title,price,featuredImage}){
 
-     
           const images = JSON.parse(featuredImage)
-          console.log(images)
-          
-          console.log(images)
-          const img = images.file1
+          const img = images.file1;
        
 
         return(
-          <div className=" bg-gray-300 h-80 w-56 flex flex-col justify-center gap-4 rounded-lg
-          font-Balsamiq max-sm:w-11 max-sm:gap-2  max-sm:scale-50 max-sm:inline">
+          <div className=" bg-gray-300   flex flex-col justify-center gap-4 rounded-lg
+          font-Balsamiq h-52 w-28 md:h-80 md:w-56">
                <Link to={`/post/${$id}`}>
-                <div className="h-48 w-40 max-sm:75 mt-1 mx-auto">
-                    <img src={img} alt="shirt" className="h-48 w-40"/>
+                <div className="h-28 w-20  md:h-48  md:w-40 mt-1 mx-auto">
+                    <img src={img} alt="shirt" className=" h-28 w-20  md:h-48 md:w-40"/>
                 </div>
-               <div >
-                <h1 className="text-center">{BrandName}</h1>
-                <h5 className="ml-2 text-sm">{title}</h5>
-                <h5 className="ml-2 text-sm">Price:₹{price}</h5>
+               <div className="text-[0.8rem] md:text-[0.95rem]" >
+                <p className="text-center">{BrandName}</p>
+                <p className="ml-2 ">{title}</p>
+                <p className="ml-2 ">Price:₹{price}</p>
                </div>
              </Link>
              </div>

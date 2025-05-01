@@ -34,9 +34,12 @@
         e.preventDefault()
         
         await authService.getCurrentUser().then((userData)=>{
+  
+             const imageData = JSON.stringify(image.file1)
+             
             if(post!==null && userData!==null){
                   service.createCartdata({docId:post.$databaseId,
-                  featuredImage:image[0],Color:post.Color,price:post.price,
+                  featuredImage:imageData,Color:post.Color,price:post.price,
                   quantity:qty,size:size,title:post.title,userId:userData.$id}); 
                   setDisplay("block")
                   setClick('cursor-not-allowed')
