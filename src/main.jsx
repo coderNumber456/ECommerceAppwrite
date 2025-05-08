@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import {Route, createBrowserRouter, createRoutesFromElements , RouterProvider} from "react-router-dom"
 import Home from './Components/Outlets/Home.jsx'
+import About from './Components/Outlets/About.jsx'
 import Login from './Components/Forms/Login.jsx'
 import SellerForm from './Components/Forms/SellerForm.jsx'
 import dataStore from './Store/dataStore.js'
@@ -15,6 +16,7 @@ import Logout from './Components/Forms/Logout.jsx'
 import Post from './Components/Outlets/Post.jsx'
 import Cart from './Components/Outlets/Cart.jsx'
 import CompleteOrder from './Components/Forms/CompleteOrder.jsx'
+import User from './Components/Outlets/user.jsx'
 
 
 
@@ -31,6 +33,8 @@ const router = createBrowserRouter(
         <Route path='/post/:id' element={<Post/>} />
         <Route path='/cart' element={<Cart/>} />
         <Route path='/completeorder' element={<CompleteOrder/>} />
+        <Route path='/about' element={<About/>}/>
+        <Route path='/user' element={<User/>}/>
         </Route>
         
   )
