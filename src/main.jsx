@@ -16,7 +16,7 @@ import Logout from './Components/Forms/Logout.jsx'
 import Post from './Components/Outlets/Post.jsx'
 import Cart from './Components/Outlets/Cart.jsx'
 import CompleteOrder from './Components/Forms/CompleteOrder.jsx'
-import User from './Components/Outlets/user.jsx'
+import User from './Components/Outlets/User.jsx'
 
 
 
