@@ -10,13 +10,15 @@ function Logout(){
   const navigate = useNavigate()
 
   useEffect(()=>{
-   setTimeout(() => {
-       const data = authService.logout()
-       if(data){
+   setTimeout(async () => {
+       const data =  await authService.logout()
+       console.log("logout Data",data)
+       if(data === undefined){
          dispatch(logout())
+         console.log("logged out ")
          navigate("/")
        } 
-   }, 1000); 
+   }, 1000)
     },[])
     
     return(

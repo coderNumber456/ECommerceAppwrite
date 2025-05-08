@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Input from "../Textinput";
+import Input from "../Comp/Textinput";
 import authService from "../../appwrite/Auth";
 import service from "../../appwrite/config";
 

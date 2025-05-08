@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Input from "../Textinput";
+import Input from "../Comp/Textinput";
 import {useForm} from"react-hook-form"
 import { login, sellFlag } from "../../Store/authSlice";
 import {useDispatch} from "react-redux"

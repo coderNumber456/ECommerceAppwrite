@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useMemo } from "react"
 import { useState } from "react"
 import service from "../../appwrite/config"
 import authService from "../../appwrite/Auth"
@@ -30,18 +30,21 @@ useEffect(()=>{
       };getCart()
 },[slug,qtyData])
     
-
-
-        useEffect(()=>{
-          
+    const totalValue = useMemo(()=>{
         if (data.length !== 0) {
             const arr = []
             for (let i = 0; i < data.length; i++) {
                 arr.push((parseInt(data[i].price) * parseInt(data[i].quantity)))
             }
           const sum = arr.reduce((acc, val) => (acc += val))
-            setTotal(sum)   
+          
+            return sum   
         }
+    },[qtyData,data])
+
+        useEffect(()=>{
+         const totalAmount = totalValue
+         setTotal(totalAmount)
         },[qtyData,data])
 
 
@@ -59,7 +62,7 @@ return (
             </div>
             {/* Cart Items */}
             {data.map((post) => (
-                <Cartitem {...post} />
+                <Cartitem {...post} key={post.$id} />
             ))
             }
         </div>
@@ -68,7 +71,7 @@ return (
             <h1 className="text-center text-xl"> Total : {total}</h1>
             <Link to={"/completeorder"}>
                 <button className="bg-red-700 p-2">Check-Out</button>
-            </Link>
+            </Link> 
         </div>
 
     </div>

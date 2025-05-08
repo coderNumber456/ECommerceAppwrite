@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Input from "../Textinput";
+import Input from "../Comp/Textinput";
 import { useForm } from "react-hook-form";
 import { useDispatch ,useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";

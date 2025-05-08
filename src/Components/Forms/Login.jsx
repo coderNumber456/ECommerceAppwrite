@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import Input from "../Textinput"
+import Input from "../Comp/Textinput";
 import { Form, useForm } from "react-hook-form";
-import InputNumber from "../InputNumber";
+import InputNumber from "../Comp/InputNumber";
 import authService from "../../appwrite/Auth";
 import { useDispatch } from "react-redux";
 import { login } from "../../Store/authSlice";

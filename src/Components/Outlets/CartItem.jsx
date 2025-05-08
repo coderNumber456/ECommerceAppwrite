@@ -10,6 +10,7 @@ function Cartitem({$id,title,Color,size,price,quantity,featuredImage}){
   const[total,setTotal]=useState()
   const [load,setLoad] =useState(true)
   const dispatch = useDispatch()
+  const image = JSON.parse(featuredImage)
   
   useEffect(()=>{
       setTotal(parseInt(price)*qty)  
@@ -17,7 +18,8 @@ function Cartitem({$id,title,Color,size,price,quantity,featuredImage}){
        dispatch(qtyFlag())
     },[qty,load])
 
-     const image = JSON.parse(featuredImage)
+    
+
     
 
     return(
@@ -61,7 +63,7 @@ function Cartitem({$id,title,Color,size,price,quantity,featuredImage}){
     )
 }
 
-export default Cartitem
+export default (Cartitem)
 
 
 

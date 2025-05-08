@@ -1,9 +1,11 @@
-import React from "react";
+
 import Card from "./Card";
 import { list } from "postcss";
 
+
 function Home(){
 
+     
 
     return(
         <div className="flex flex-wrap justify-evenly items-center mt-10">

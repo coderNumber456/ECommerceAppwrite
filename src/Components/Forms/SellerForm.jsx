@@ -1,7 +1,7 @@
 import React, { useState ,useEffect } from "react";
 import { Form, useForm } from "react-hook-form"
-import Input from "../Textinput";
-import Select from "../Select";
+import Input from "../Comp/Textinput";
+import Select from "../Comp/Select";
 import Dropdown from "./Dropdowns";
 import { useSelector } from "react-redux";
 import { getQuantity } from "../../Store/dataSlice";
